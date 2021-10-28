@@ -9,6 +9,7 @@ from utils import get_module_logger
 
 import shutil
 
+
 def split(data_dir):
     """
     Create three splits from the processed records. The files should be moved to new folders in the 
@@ -18,9 +19,8 @@ def split(data_dir):
         - data_dir [str]: data directory, /mnt/data
     """
     # TODO: Implement function
-    
     # define source directory
-    src_file_dir = '/data/waymo/'
+    src_file_dir = '/home/workspace/data/preprocessed_data/'
 
     # retrieve file name from source directory and only keeps file starts with name 'segment'
     file_names_raw = os.listdir(src_file_dir)
@@ -71,12 +71,13 @@ def split(data_dir):
 
             # check if file is already exist, if not, move data to the folder
             if os.path.exists(dst_path) == False:
-                os.symlink(src_path, dst_path)   
+                shutil.move(src_path, dst_path) 
+#                 os.symlink(src_path, dst_path)   
+                  
                 
     else:
         print("not enough data to split")
-    
-    
+
 if __name__ == "__main__": 
     parser = argparse.ArgumentParser(description='Split data into training / validation / testing')
     parser.add_argument('--data_dir', required=True,
