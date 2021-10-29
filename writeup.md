@@ -20,7 +20,24 @@ Since there aren't many raw training images, I decided to create a cross-validat
 
 ### Training 
 #### Reference experiment
-This section should detail the results of the reference experiment. It should includes training metrics and a detailed explanation of the algorithm's performances.
+Due to GPU memory limitation in Udacity VM, I decide to run evaluation after training process finishes. While running evaluation, I encounter the type error message. To bypass this error, the setting "metrics_set" was changed to "pascal_voc_detection_metrics". From the training curve, we can observe that validation has higher loss than training and training loss is still dropping. In addition, validation loss tends to be flat afer step 19k. Both trends indicate that the training is overfitting to the training set. 
+Training graph
+![image](https://user-images.githubusercontent.com/15081906/139452966-9ca4903f-1a9f-48a5-a1c7-b5d730b932c1.png)
+
+Here are validation results at step = 19k and 20k
+|Metric|19k|20k|
+|---|---|---|
+|mAP@0.5IOU|0.1233|0.1337|
+|vehicle|0.0969|0.0986|
+|pedestrian|0.1497|0.1689|
+|cyclist|nan|nan|
+|localization_loss|0.3694|0.3724|
+|classification_loss|0.2900|0.2998|
+|regularization_loss|0.1330|0.1290|
+|total_loss|0.7924|0.7924|0.80133|
+
+Validation graph
+![image](https://user-images.githubusercontent.com/15081906/139453985-c134d5c5-32aa-4721-9b70-5ce3e4409e44.png)
 
 #### Improve on the reference
 This section should highlight the different strategies you adopted to improve your model. It should contain relevant figures and details of your findings.
