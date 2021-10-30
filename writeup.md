@@ -40,11 +40,18 @@ Validation graph
 ![image](https://user-images.githubusercontent.com/15081906/139461836-442f5371-4788-43fa-bb6b-98703160e47b.png)
 
 #### Improve on the reference
-Since typical image augmentations, which had been proven to be effective, are random brightness, contrast and saturation adjustments, I decide to include them into final augmentation pipeline. However, I am not sure if other augmentation method is also helpful, so I decide to test one random augmentation that is random hue adjustment. From the graph below we can observe that random hue adjustment causes a huge training outlier at around step 1k. Therefore, I drop the random hue adjustment from final image augmentation pipeline.
+Since typical image augmentations, which had been proven to be effective, are random brightness, and contrast adjustments, I decide to include them into final augmentation pipeline. However, I am not sure if other augmentation method is also helpful, so I decide to test one random augmentation that is random hue adjustment. From the graph below we can observe that random hue adjustment causes a huge training outlier at around step 1k. Therefore, I drop the random hue adjustment from final image augmentation pipeline.
 
 Training graph of reference + random hue augmentation with default parameter setting
 ![image](https://user-images.githubusercontent.com/15081906/139461556-482f7d89-ffe3-4603-9d07-d528e71cf7d6.png)
 
-Here is the graph of training with my final augmentation pipeline which includes random brightness, contrast, saturation adjustments, and augmentations (random horizontal flip and random crop) included in reference config. 
+Then, to test if random brightness and contrast adjustments create reasonable image for training, I use notebook "Explore augmentations.ipynb" to test those two adjustments. 
+After comfirming both adjustments result in reasonable images, I ran the training again. The following graph is the result.
+![image](https://user-images.githubusercontent.com/15081906/139514948-e175ff85-d005-4e59-83ca-1a0a77a9234d.png)
+
+From above graph, it is interesting that with additional two random adjustments the training performance is just similar to reference. I suspect that having good reference training result is just pure luck. Therefore, I ran the reference training again. The following graph shows bad results from reference2 that supports the assumption.
+![image](https://user-images.githubusercontent.com/15081906/139513812-d7afb175-36dd-4237-a6f5-3813b7ea370a.png)
+
+
 
 
